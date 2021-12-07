@@ -15,16 +15,16 @@ test("part one example number of lantern fish after 80 days should equal 5934", 
   expect(answer).toBe(5934);
   // console.log(countLanternFishAfterNumberOfDays(data, 80));
 });
-// test("part one data number of lantern fish after 80 days should equal 362666", () => {
-//   // console.log(example);
-//   const answer = countLanternFishAfterNumberOfDays(data, 80);
-//   expect(answer).toBe(362666);
-//   // console.log(countLanternFishAfterNumberOfDays(data, 80));
-// });
+test("part one data number of lantern fish after 80 days should equal 362666", () => {
+  // console.log(example);
+  const answer = countLanternFishAfterNumberOfDays(data, 80);
+  expect(answer).toBe(362666);
+  // console.log(countLanternFishAfterNumberOfDays(data, 80));
+});
 
-// test("part two example number of lantern fish after 256 days should equal 26984457539", () => {
-//   // console.log(example);
-//   const answer = countLanternFishAfterNumberOfDays(example, 256);
-//   expect(answer).toBe(26984457539);
-//   // console.log(getOverlappingPoints(data));
-// });
+test("part two example number of lantern fish after 256 days should equal 26984457539", () => {
+  // console.log(example);
+  const answer = countLanternFishAfterNumberOfDays(example, 256);
+  expect(answer).toBe(26984457539);
+  console.log(countLanternFishAfterNumberOfDays(data, 256));
+});

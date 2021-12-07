@@ -5,29 +5,23 @@ export const countLanternFishAfterNumberOfDays = (
   days: number
 ): number => {
   fishes.sort((a, b) => a - b);
-  console.log(fishes);
-  fishes = fishes.reduce((p, c) => {
-    p[c]++;
-  }, []);
-
-  console.log(fishes);
-  return fishes.reduce((prev, cur) => prev + cur[0] * cur[1], 0);
-};
-
-const countDecendants = (fishes: number[], days: number): number => {
-  for (let i = 0; i < days; i++) {
-    const newFishes: number[] = [];
-    fishes = fishes.map((value) => {
-      if (value === 0) {
-        newFishes.push(8);
-        return 6;
-      }
-      return value - 1;
+  let ages = fishes.reduce((p, c) => {
+    p[c] += 1;
+    return p;
+  }, Array(9).fill(0));
+  console.log(ages);
+  for (let day = 0; day < days; day++) {
+    const spawning = ages[0];
+    ages = ages.map((v, i, a) => {
+      if (i + 1 < ages.length) return a[i + 1];
+      return 0;
     });
-    fishes = [...fishes, ...newFishes];
+    ages[8] += spawning;
+    ages[6] += spawning;
   }
-  return fishes.length;
+  return ages.reduce((prev, cur) => prev + cur, 0);
 };
+
 export const getData = (filename: string): number[] =>
   getTextFile(__dirname, filename)
     .split(",")
