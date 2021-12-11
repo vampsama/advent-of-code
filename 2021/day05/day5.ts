@@ -27,22 +27,22 @@ const markVents = (ventData: number[][][]): number[][] => {
     // console.log("radc", rowCells);
     // console.log("colc", colCells);
     if (
-      rowCells[0] - colCells[0] ===
-      rowCells[1] - colCells[1]
-      // ||
-      // value[0][0] === value[1][0] ||
-      // value[0][1] === value[1][1] ||
-      // (value[0][0] === value[0][1] && value[1][0] === value[1][1])
+      // rowCells[0] - colCells[0] ===
+      // rowCells[1] - colCells[1]
+      // // ||
+      value[0][0] === value[1][0] ||
+      value[0][1] === value[1][1]
+      // || (value[0][0] === value[0][1] && value[1][0] === value[1][1])
       //||value[0][0] - value[1][1] === value[0][1] - value[1][0]
     ) {
       //markera rad
-      console.log("rad", value);
+      // console.log("rad", value);
       for (let i = rowCells[0]; i <= rowCells[1]; i++) {
         for (let j = colCells[0]; j <= colCells[1]; j++) {
           chart[i][j] += 1;
         }
       }
-      console.log(chart.map((row) => row.join("")).join("\n"));
+      // console.log(chart.map((row) => row.join("")).join("\n"));
     }
     // if (value[0][1] === value[1][1]) {
     //   // console.log("kollumn", value);
