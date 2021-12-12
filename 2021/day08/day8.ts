@@ -19,37 +19,63 @@ export const partTwo = (data: string[]): number => {
         .map((e) => e.split("").sort().join(""));
       return [input, output];
     });
-  const keys = orderedData.map((e) =>
-    e[0].reduce((p, c) => {
-      if (c.length === 2) p[1] = c;
-      if (c.length === 3) p[7] = c;
-      if (c.length === 7) p[8] = c;
-      if (c.length === 4) p[4] = c;
-      if (c.length === 5) {
-        if (c.includes(p[1][0]) && c.includes(p[1][1])) p[3] = c;
-        // if (c.includes(p[1][0]) && c.includes(p[1][1])) p[3] = c;
-        //if (c.includes(p[1][0]) && c.includes(p[1][1])) p[3] = c;
+  const keys = orderedData.map((row) => {
+    const p = new Array(10).fill("");
+    const e = row[0];
+    p[1] = e[0];
+    p[7] = e[1];
+    p[8] = e[9];
+    p[4] = e[2];
+    for (let i = 6; i <= 8; i++) {
+      if (
+        e[i].includes(p[4][0]) &&
+        e[i].includes(p[4][1]) &&
+        e[i].includes(p[4][2]) &&
+        e[i].includes(p[4][3])
+      ) {
+        p[9] = e[i];
+      } else if (e[i].includes(p[1][0]) && e[i].includes(p[1][1])) {
+        p[0] = e[i];
+      } else {
+        p[6] = e[i];
       }
-      if (c.length === 6) {
-        if (
-          c.includes(p[4][0]) &&
-          c.includes(p[4][1]) &&
-          c.includes(p[4][2]) &&
-          c.includes(p[4][3])
-        ) {
-          p[9] = c;
-        } else if (c.includes(p[1][0]) && c.includes(p[1][1])) p[6] = c;
-        else p[0] = c;
+    }
 
-        //if (c.includes(p[1][0]) && c.includes(p[1][1])) p[3] = c;
+    for (let i = 3; i <= 5; i++) {
+      if (e[i].includes(p[1][0]) && e[i].includes(p[1][1])) {
+        p[3] = e[i];
+        continue;
       }
-
-      return p;
-    }, new Array(10).fill(0))
-  );
-  console.log(orderedData);
-  console.log(keys);
-  return 0;
+    }
+    for (let i = 3; i <= 5; i++) {
+      if (e[i] === p[3]) continue;
+      if (allLettersPresent(p[6], e[i])) {
+        p[5] = e[i];
+        continue;
+      }
+      p[2] = e[i];
+    }
+    return p;
+  });
+  return orderedData
+    .map((d, i) => {
+      return Number(
+        d[1]
+          .map((output) => {
+            return keys[i].indexOf(output);
+          })
+          .join("")
+      );
+    })
+    .reduce((p, c) => p + c, 0);
+};
+const allLettersPresent = (key: string, input: string): boolean => {
+  for (let i = 0; i < input.length; i++) {
+    if (!key.includes(input[i])) {
+      return false;
+    }
+  }
+  return true;
 };
 class Key {
   constructor() {}
